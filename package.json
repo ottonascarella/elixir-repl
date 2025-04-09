@@ -17,7 +17,7 @@
     "commands": [
       {
         "command": "elixir-repl.startSession",
-        "title": "Elixir REPL: Start IEx Session"
+        "title": "Elixir REPL: Start a IEx Session or show it"
       },
       {
         "command": "elixir-repl.recompile",
@@ -29,46 +29,13 @@
       },
       {
         "command": "elixir-repl.clear",
-        "title": "Elixir REPL: Clear iEX"
+        "title": "Elixir REPL: Clear iEX terminal"
       }
     ],
-    "menus": {
-      "view/title": [
-        {
-          "command": "elixir-repl.startSession",
-          "when": "view == elixir-repl-terminal",
-          "group": "navigation"
-        }
-      ],
-      "editor/context": [
-        {
-          "command": "elixir-repl.sendSelected",
-          "when": "editorHasSelection",
-          "group": "elixir-repl"
-        }
-      ]
-    },
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "elixir-repl-container",
-          "title": "Elixir REPL",
-          "icon": "$(terminal)"
-        }
-      ]
-    },
-    "views": {
-      "elixir-repl-container": [
-        {
-          "id": "elixir-repl-terminal",
-          "name": "IEx Session"
-        }
-      ]
-    },
     "keybindings": [
       {
         "command": "elixir-repl.sendSelected",
-        "key": "ctrl+x /",
+        "key": "ctrl+x .",
         "when": "editorTextFocus"
       },
       {
@@ -83,7 +50,7 @@
       },
       {
         "command": "elixir-repl.recompile",
-        "key": "ctrl+x ctrl+c",
+        "key": "ctrl+x c",
         "when": "editorTextFocus"
       }
     ]

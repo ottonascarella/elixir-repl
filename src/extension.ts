@@ -6,7 +6,11 @@ let terminal: vscode.Terminal | undefined;
 
 function getCurrentLine(editor: vscode.TextEditor) {
   const line = editor.document.lineAt(editor.selection.active.line);
-  return line.text;
+  return line.text
+    .trim()
+    .replace(/^#+/, "")
+    .replace(/^iex(.+)\s/, "")
+    .trim();
 }
 
 const commands: Record<string, (...args: any[]) => any> = {
@@ -57,9 +61,7 @@ const commands: Record<string, (...args: any[]) => any> = {
       return;
     }
 
-    const textWithNoComments = textToSend.trim().replace(/^#/, "");
-
-    terminal.sendText(`${textWithNoComments}\n`);
+    terminal.sendText(`${textToSend}\n`);
   },
 };
 
@@ -74,45 +76,6 @@ export function activate(context: vscode.ExtensionContext) {
       ),
     );
   });
-
-  // Optional: Create the view in the sidebar and associate the terminal with it
-  const provider = new (class
-    implements vscode.TreeDataProvider<vscode.TreeItem>
-  {
-    getTreeItem(
-      element: vscode.TreeItem,
-    ): vscode.TreeItem | Thenable<vscode.TreeItem> {
-      return element;
-    }
-    getChildren(
-      element?: vscode.TreeItem | undefined,
-    ): vscode.ProviderResult<vscode.TreeItem[]> {
-      return [
-        new vscode.TreeItem(
-          "IEx Session (Click to Focus)",
-          vscode.TreeItemCollapsibleState.None,
-        ),
-      ];
-    }
-    _onDidChangeTreeData: vscode.EventEmitter<
-      vscode.TreeItem | undefined | null | void
-    > = new vscode.EventEmitter<vscode.TreeItem | undefined | null | void>();
-    readonly onDidChangeTreeData: vscode.Event<
-      vscode.TreeItem | undefined | null | void
-    > = this._onDidChangeTreeData.event;
-  })();
-
-  vscode.window.registerTreeDataProvider("elixir-repl-terminal", provider);
-
-  context.subscriptions.push(
-    vscode.commands.registerCommand("elixir-repl-terminal.focus", () => {
-      if (terminal) {
-        terminal.show();
-      } else {
-        commands.startSession();
-      }
-    }),
-  );
 
   context.subscriptions.push(
     vscode.window.onDidCloseTerminal((closedTerminal) => {
