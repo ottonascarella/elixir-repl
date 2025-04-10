@@ -17,15 +17,15 @@
     "commands": [
       {
         "command": "elixir-repl.startSession",
-        "title": "Elixir REPL: Start a IEx Session or show it"
+        "title": "Elixir REPL: Starts or shows a IEx terminal session"
       },
       {
         "command": "elixir-repl.recompile",
-        "title": "Elixir REPL: Run recompile"
+        "title": "Elixir REPL: Run recompile on IEx"
       },
       {
         "command": "elixir-repl.sendSelected",
-        "title": "Elixir REPL: Send text for evaluation"
+        "title": "Elixir REPL: Send text for evaluation to IEx"
       },
       {
         "command": "elixir-repl.clear",
