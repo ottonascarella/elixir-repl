@@ -8,13 +8,18 @@ A VS Code extension for interacting with an Elixir IEx session.
 * Allows sending `recompile()` to the IEx session.
 * Allows sending selected text (or current line) from the editor to the IEx session.
 * Allows clearing the IEx session.
+* Allows adding extra params to the IEx session start
 
 ## Usage
 
-* `ctrl+x ctrl+x   ` - Starts a session (or opens it's terminal in case it's been open)
-* `ctrl+x c        ` - Recompiles project
-* `ctrl+x .        ` - Evaluates current line or current selection
-* `ctrl+x backspace` - Starts a session
+| Shortcut or command | Description |
+|--|--|
+| ctrl+x ctrl+x | Starts a session (or opens it's terminal in case it's been open) |
+| ctrl+x c | Recompiles project |
+| ctrl+x . | Evaluates current line or current selection |
+| ctrl+x backspace | Starts a session |
+
+*To configure more options to IEx session start, look for "Configure IEx Parameters" under "Elixir REPL" category.*
 
 ## Building it
 

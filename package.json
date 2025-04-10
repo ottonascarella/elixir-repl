@@ -2,7 +2,7 @@
   "name": "elixir-repl",
   "displayName": "elixir-repl",
   "description": "A lisp-like REPL experience for elixir using IEx",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.96.0"
   },
@@ -17,19 +17,28 @@
     "commands": [
       {
         "command": "elixir-repl.startSession",
-        "title": "Elixir REPL: Starts or shows a IEx terminal session"
+        "title": "Starts or shows a IEx terminal session",
+        "category": "Elixir REPL"
+      },
+      {
+        "command": "elixir-repl.configureIexParams",
+        "title": "Configure IEx Parameters",
+        "category": "Elixir REPL"
       },
       {
         "command": "elixir-repl.recompile",
-        "title": "Elixir REPL: Run recompile on IEx"
+        "title": "Run recompile on IEx",
+        "category": "Elixir REPL"
       },
       {
         "command": "elixir-repl.sendSelected",
-        "title": "Elixir REPL: Send text for evaluation to IEx"
+        "title": "Send text for evaluation to IEx",
+        "category": "Elixir REPL"
       },
       {
         "command": "elixir-repl.clear",
-        "title": "Elixir REPL: Clear iEX terminal"
+        "title": "Clear iEX terminal",
+        "category": "Elixir REPL"
       }
     ],
     "keybindings": [
