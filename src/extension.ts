@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from "fs";
+import * as path from "path";
 
 const pluginName = "elixir-repl";
 
@@ -13,37 +13,37 @@ interface ProjectSettings {
 function getSettingsPath(): string | undefined {
   const workspaceRoot = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
   if (!workspaceRoot) return undefined;
-  
-  const vscodePath = path.join(workspaceRoot, '.vscode');
+
+  const vscodePath = path.join(workspaceRoot, ".vscode");
   // Ensure .vscode directory exists
   if (!fs.existsSync(vscodePath)) {
     fs.mkdirSync(vscodePath, { recursive: true });
   }
-  return path.join(vscodePath, 'elixir-repl.json');
+  return path.join(vscodePath, "elixir-repl.json");
 }
 
 async function loadProjectSettings(): Promise<ProjectSettings> {
   const settingsPath = getSettingsPath();
   if (!settingsPath || !fs.existsSync(settingsPath)) {
-    return { iexParams: '' };
+    return { iexParams: "" };
   }
-  
+
   try {
-    const data = await fs.promises.readFile(settingsPath, 'utf8');
+    const data = await fs.promises.readFile(settingsPath, "utf8");
     return JSON.parse(data);
   } catch {
-    return { iexParams: '' };
+    return { iexParams: "" };
   }
 }
 
 async function saveProjectSettings(settings: ProjectSettings): Promise<void> {
   const settingsPath = getSettingsPath();
   if (!settingsPath) return;
-  
+
   await fs.promises.writeFile(
     settingsPath,
     JSON.stringify(settings, null, 2),
-    'utf8'
+    "utf8",
   );
 }
 
@@ -52,7 +52,7 @@ function getCurrentLine(editor: vscode.TextEditor) {
   return line.text
     .trim()
     .replace(/^#+/, "")
-    .replace(/^iex(.+)\s/, "")
+    .replace(/^iex(?:\(\d+\))?>+\s*/, "")
     .trim();
 }
 
@@ -60,7 +60,7 @@ const commands: Record<string, (...args: any[]) => any> = {
   startSession: async () => {
     if (!terminal || terminal.exitStatus !== undefined) {
       const settings = await loadProjectSettings();
-      
+
       terminal = vscode.window.createTerminal({
         isTransient: true,
         name: "IEx",
@@ -74,16 +74,19 @@ const commands: Record<string, (...args: any[]) => any> = {
 
   configureIexParams: async () => {
     const settings = await loadProjectSettings();
-    
+
     const params = await vscode.window.showInputBox({
       prompt: "Enter IEx parameters for this project",
       placeHolder: "iex -s mix <anything you'd add here>",
-      value: settings.iexParams
+      value: settings.iexParams,
     });
-    
-    if (params !== undefined) {  // Only save if user didn't cancel
+
+    if (params !== undefined) {
+      // Only save if user didn't cancel
       await saveProjectSettings({ ...settings, iexParams: params });
-      vscode.window.showInformationMessage('IEx parameters saved for this project');
+      vscode.window.showInformationMessage(
+        "IEx parameters saved for this project",
+      );
     }
   },
   recompile: async () => {
@@ -132,8 +135,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
       vscode.commands.registerCommand(
         `${pluginName}.${commandName}`,
-        commands[commandName]
-      )
+        commands[commandName],
+      ),
     );
   });
 
@@ -142,7 +145,7 @@ export function activate(context: vscode.ExtensionContext) {
       if (closedTerminal === terminal) {
         terminal = undefined;
       }
-    })
+    }),
   );
 }
 

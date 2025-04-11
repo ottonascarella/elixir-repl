@@ -4,6 +4,5 @@ All notable changes to the "elixir-repl" extension will be documented in this fi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
-
 - Initial release
+- 2025-04-11 - fix regex that removes `iex>` before executing line

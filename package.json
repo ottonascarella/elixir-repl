@@ -2,7 +2,7 @@
   "name": "elixir-repl",
   "displayName": "elixir-repl",
   "description": "A lisp-like REPL experience for elixir using IEx",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.96.0"
   },
