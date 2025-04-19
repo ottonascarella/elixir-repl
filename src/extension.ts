@@ -63,7 +63,7 @@ const commands: Record<string, (...args: any[]) => any> = {
 
       terminal = vscode.window.createTerminal({
         isTransient: true,
-        name: "IEx",
+        name: "beam.smp",
         shellPath: process.env.SHELL,
         cwd: vscode.workspace.workspaceFolders?.[0]?.uri.fsPath,
       });
