@@ -67,7 +67,7 @@ const commands: Record<string, (...args: any[]) => any> = {
         shellPath: process.env.SHELL,
         cwd: vscode.workspace.workspaceFolders?.[0]?.uri.fsPath,
       });
-      terminal.sendText(`iex -S mix ${settings.iexParams}\n`);
+      terminal.sendText(`iex ${settings.iexParams}\n`);
     }
     terminal.show();
   },
@@ -77,7 +77,7 @@ const commands: Record<string, (...args: any[]) => any> = {
 
     const params = await vscode.window.showInputBox({
       prompt: "Enter IEx parameters for this project",
-      placeHolder: "iex -s mix <anything you'd add here>",
+      placeHolder: "iex <anything you'd add here>",
       value: settings.iexParams,
     });
 

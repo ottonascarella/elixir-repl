@@ -4,7 +4,7 @@ A VS Code extension for interacting with an Elixir IEx session.
 
 ## Features
 
-* Starts an IEx session with `iex -S mix`.
+* Starts an IEx session with `iex`.
 * Allows sending `recompile()` to the IEx session.
 * Allows sending selected text (or current line) from the editor to the IEx session.
 * Allows clearing the IEx session.
